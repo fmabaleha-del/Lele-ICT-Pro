@@ -1,0 +1,17 @@
+//@version=6
+indicator("Lele ICT Pro v0.1", overlay=true)
+
+//====================================================
+// LELE ICT PRO
+// Version: 0.1.0
+// Status: In Development
+//====================================================
+
+// Market Structure Engine
+// Liquidity Engine
+// Fair Value Gaps
+// Order Blocks
+// Dashboard
+// Alerts
+
+plot(close, title="Price", color=color.blue)
