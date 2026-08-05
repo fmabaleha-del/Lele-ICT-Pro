@@ -35,3 +35,34 @@ if showSwings
 
     if not na(pivotLow)
         label.new(bar_index - swingLength, pivotLow, "SL", style=label.style_label_up, color=bullColor, textcolor=color.white)
+
+//============================
+// BREAK OF STRUCTURE (BOS)
+//============================
+
+var float lastHigh = na
+var float lastLow = na
+
+if not na(pivotHigh)
+    lastHigh := pivotHigh
+
+if not na(pivotLow)
+    lastLow := pivotLow
+
+bullBOS = ta.crossover(close, lastHigh)
+bearBOS = ta.crossunder(close, lastLow)
+
+if showBOS
+    if bullBOS
+        label.new(bar_index, high,
+            "BOS",
+            style=label.style_label_up,
+            color=color.blue,
+            textcolor=color.white)
+
+    if bearBOS
+        label.new(bar_index, low,
+            "BOS",
+            style=label.style_label_down,
+            color=color.orange,
+            textcolor=color.white)
