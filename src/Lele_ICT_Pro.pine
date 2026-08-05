@@ -1,17 +1,37 @@
 //@version=6
-indicator("Lele ICT Pro v0.1", overlay=true)
+indicator("Lele ICT Pro v0.1.0", overlay=true, max_labels_count=500, max_lines_count=500)
 
 //====================================================
 // LELE ICT PRO
+// Professional ICT / SMC Indicator
 // Version: 0.1.0
-// Status: In Development
+// Status: Sprint 1 - Market Structure
 //====================================================
 
-// Market Structure Engine
-// Liquidity Engine
-// Fair Value Gaps
-// Order Blocks
-// Dashboard
-// Alerts
+//=========================
+// INPUTS
+//=========================
+groupStructure = "Market Structure"
 
-plot(close, title="Price", color=color.blue)
+swingLength = input.int(5, "Swing Length", minval=2, group=groupStructure)
+showSwings = input.bool(true, "Show Swing Points", group=groupStructure)
+showBOS = input.bool(true, "Show BOS", group=groupStructure)
+
+//=========================
+// COLORS
+//=========================
+bullColor = color.lime
+bearColor = color.red
+
+//=========================
+// SWING DETECTION
+//=========================
+pivotHigh = ta.pivothigh(high, swingLength, swingLength)
+pivotLow  = ta.pivotlow(low, swingLength, swingLength)
+
+if showSwings
+    if not na(pivotHigh)
+        label.new(bar_index - swingLength, pivotHigh, "SH", style=label.style_label_down, color=bearColor, textcolor=color.white)
+
+    if not na(pivotLow)
+        label.new(bar_index - swingLength, pivotLow, "SL", style=label.style_label_up, color=bullColor, textcolor=color.white)
